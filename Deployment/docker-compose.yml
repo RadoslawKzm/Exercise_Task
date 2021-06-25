@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  main_service:
+    container_name: main_service
+    build:
+      context: ../.
+      dockerfile: ./Deployment/Dockerfile
+      args:
+        APP_FOLDER: App
+    entrypoint: /App/entrypoint.sh
+    ports:
+      - 8000:8000
