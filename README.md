@@ -48,5 +48,44 @@
 
 Type in cmd
 ```
-git clone https://github.com/RadoslawKzm/Excerise_task.git
+$ git clone https://github.com/RadoslawKzm/Excerise_Task.git
+$ pip3 install -r requirements.txt
+```
+
+## Running the service
+
+##### Docker start & build:
+Starting services `$ docker-compose up --build app && docker-compose rm -fsv`
+Stopping services:`$ docker-compose down` or crtl+c
+##### Curl Testing
+- Post request:
+```
+curl --location --request POST 'http://localhost:8000/ping' \
+--header 'Content-Type: application/json' \
+--data-raw '{"url": "https://google.com"}'
+```
+- Get request:
+```
+curl --location --request GET 'http://localhost:8000/info'
+```
+if above don't work try replacing localhost > 127.0.0.1
+
+
+## Before commit
+Steps to take before commit or your commit will not be accepted.<br>
+- once at start if not done already `$ pip3 install -r requirements.txt`
+- having main folder requirements installed `$ pre-commit run --all-files`
+
+Before you send the code to the server, please runt this tests
+```
+$ python -m black --check -l 120 --exclude=venv .
+$ python -m flake8 .
+$ python -m isort --check-only --diff .
+$ bandit -r ./App/
+$ safety check --full-report
+```
+Part of errors you can fix running:
+```
+$ python -m black -l 120 --exclude=venv .
+$ python -m isort .
 ```
